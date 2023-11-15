@@ -11,7 +11,7 @@ export interface Info {
 }
 
 export interface Location {
-    id: number
+    id: string
     name: string
     type: string
     dimension: string

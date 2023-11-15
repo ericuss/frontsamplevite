@@ -1,11 +1,31 @@
+import { useAddresses } from '@pages/Addresses/hooks';
+import './index.css';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 
-import './index.css'
+export const Addresses: FC = () => {
+  const navigate = useNavigate();
+  const { data, hasError, isLoading } = useAddresses();
 
-export function Addresses() {
+  if (hasError || data?.results == null) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
 
-  return (
-    <>
-    asdsd
-    </>
-  )
+  const handleRedirect = (id: string) => {
+    return navigate({
+      pathname: `/addresses/${id}`
+    });
+  }
+
+  const handleRedirectToEdit = (id: string) => {
+    return navigate({
+      pathname: `/addresses/${id}/update`
+    });
+  }
+  // render data
+  return <div>
+    <h2>Locations</h2>
+    <ul>
+      {data.results.map(x => <li key={x.id}>  <span onClick={() => handleRedirect(x.id)}>{x.name}</span > <button onClick={() => handleRedirectToEdit(x.id)}>edit</button></li>)}
+    </ul>
+  </div>;
 }
