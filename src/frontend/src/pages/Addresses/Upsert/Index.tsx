@@ -1,7 +1,8 @@
-import { useAddress } from '@pages/Addresses/hooks';
+import { useAddress, urlBase, useAddresses } from '@pages/Addresses/hooks';
 import { Navigate, useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FC } from 'react';
+
 
 import './index.css';
 
@@ -17,11 +18,16 @@ export const UpsertAddress: FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>()
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data); 
+    mutate();
+  }
 
   if (id == null) return <Navigate to="/" replace={true} />
   const { data, hasError, isLoading } = useAddress(id);
+  const { mutate } = useAddresses();
 
   if (hasError || data == null) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>

@@ -3,15 +3,16 @@ import { fetcher } from '@core/http';
 import { Response as AddressesResponse } from './List/dtos';
 import { Address } from './Details/dtos';
 
-const urlBase = 'https://rickandmortyapi.com/api/location';
+export const urlBase = 'https://rickandmortyapi.com/api/location';
 
 export function useAddresses() {
-    const { data, error, isLoading } = useSWR<AddressesResponse>(urlBase, fetcher)
+    const { data, error, isLoading, mutate } = useSWR<AddressesResponse>(urlBase, fetcher)
 
     return {
         data,
         isLoading,
-        hasError: error
+        hasError: error,
+        mutate
     }
 }
 
