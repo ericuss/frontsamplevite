@@ -1,4 +1,4 @@
-import { useAddress, UpsertAddressDto, useAddresses } from '@pages/Addresses/hooks';
+import { useAddressess, UpsertAddressDto } from '@pages/Addresses/hooks';
 import { Navigate, useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FC } from 'react';
@@ -15,12 +15,13 @@ export const UpsertAddress: FC = () => {
   } = useForm<UpsertAddressDto>();
 
   if (id == null) return <Navigate to="/" replace={true} />
-  const { data, hasError, isLoading, update } = useAddress(id);
-  const { mutate } = useAddresses();
+  const hook = useAddressess();
+  const { data, error, isLoading } = hook.getAddress(id);
+  const { mutate } = hook.getAddressess();
 
   const onSubmit: SubmitHandler<UpsertAddressDto> = (data) => {
     console.log(data);
-    const result = update(id, data);
+    const result = hook.update(id, data);
     result
       .then(x => {
         console.log('success', x);
@@ -33,7 +34,7 @@ export const UpsertAddress: FC = () => {
   }
 
   if (isLoading) return <div>loading...</div>
-  if (hasError || data == null) return <div>failed to load</div>
+  if (error || data == null) return <div>failed to load</div>
 
   // render data
   return (<div>

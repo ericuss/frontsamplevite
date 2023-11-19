@@ -14,19 +14,7 @@ export interface UpsertAddressDto {
     city: string;
 }
 
-export function useAddresses() {
-    const { data, error, isLoading, mutate } = useSWR<AddressDto[]>(urlBase, fetcher)
-
-    return {
-        data,
-        isLoading,
-        hasError: error,
-        mutate
-    }
-}
-
-export function useAddress(id: string) {
-    const { data, error, isLoading } = useSWR<AddressDto>(`${urlBase}/${id}`, fetcher);
+export function useAddressess() {
 
     const update = (id: string, address: UpsertAddressDto) => {
         const requestOptions = {
@@ -38,10 +26,12 @@ export function useAddress(id: string) {
         return fetch(`${urlBase}/${id}`, requestOptions);
     };
 
+    const getAddress = (id: string) => useSWR<AddressDto>(`${urlBase}/${id}`, fetcher);
+    const getAddressess = () => useSWR<AddressDto[]>(urlBase, fetcher);
+
     return {
-        data,
-        isLoading,
-        hasError: error,
+        getAddress,
+        getAddressess,
         update
     }
 }

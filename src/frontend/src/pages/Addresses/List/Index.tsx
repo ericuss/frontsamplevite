@@ -1,14 +1,14 @@
-import { useAddresses } from '@pages/Addresses/hooks';
+import { useAddressess } from '@pages/Addresses/hooks';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
 export const Addresses: FC = () => {
   const navigate = useNavigate();
-  const { data, hasError, isLoading } = useAddresses();
+  const { data, error, isLoading } = useAddressess().getAddressess();
 
-  if (hasError || data == null) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
+  if (error || data == null) return <div>failed to load</div>
 
   const handleRedirect = (id: string) => {
     return navigate({
