@@ -1,6 +1,6 @@
 import { useAddresses } from '@pages/Addresses/hooks';
 import './index.css';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
 export const Addresses: FC = () => {
@@ -25,7 +25,7 @@ export const Addresses: FC = () => {
   return <div>
     <h2>Locations</h2>
     <ul>
-      {data.map(x => <li key={x.id}>  <span onClick={() => handleRedirect(x.id)}>{x.id}</span > <button onClick={() => handleRedirectToEdit(x.id)}>edit</button></li>)}
+      {data.map(x => <li key={x.id}>  <span onClick={() => handleRedirect(x.id)}>{x.city} - {x.street}</span > <button onClick={() => handleRedirectToEdit(x.id)}>edit</button></li>)}
     </ul>
   </div>;
 }

@@ -1,16 +1,21 @@
 import useSWR from 'swr';
 import { fetcher } from '@core/http';
-import { Response as AddressesResponse } from './List/dtos';
-import { Address } from './Details/dtos';
 
-export const urlBase = 'https://rickandmortyapi.com/api/location';
+export const urlBase = '/api/v1/addressess';
 
-interface AddressDto {
+export interface AddressDto {
     id: string;
+    street: string;
+    city: string;
+}
+
+export interface UpsertAddressDto {
+    street: string;
+    city: string;
 }
 
 export function useAddresses() {
-    const { data, error, isLoading, mutate } = useSWR<AddressDto[]>('api/v1/addressess', fetcher)
+    const { data, error, isLoading, mutate } = useSWR<AddressDto[]>(urlBase, fetcher)
 
     return {
         data,
@@ -21,11 +26,22 @@ export function useAddresses() {
 }
 
 export function useAddress(id: string) {
-    const { data, error, isLoading } = useSWR<Address>(`${urlBase}/${id}`, fetcher)
+    const { data, error, isLoading } = useSWR<AddressDto>(`${urlBase}/${id}`, fetcher);
+
+    const update = (id: string, address: UpsertAddressDto) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(address)
+        };
+
+        return fetch(`${urlBase}/${id}`, requestOptions);
+    };
 
     return {
         data,
         isLoading,
-        hasError: error
+        hasError: error,
+        update
     }
 }
