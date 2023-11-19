@@ -21,6 +21,15 @@ export default defineConfig({
     svgr()
   ],
   server: {
-    port: 6090
+    port: 6090,
+    https: true,
+    proxy: {
+      '/api': {
+        target: 'https://localhost:6443',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '/api'),
+        secure: false
+      }
+    }
   }
 })

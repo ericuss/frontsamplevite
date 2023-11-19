@@ -7,7 +7,7 @@ export const Addresses: FC = () => {
   const navigate = useNavigate();
   const { data, hasError, isLoading } = useAddresses();
 
-  if (hasError || data?.results == null) return <div>failed to load</div>
+  if (hasError || data == null) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
   const handleRedirect = (id: string) => {
@@ -25,7 +25,7 @@ export const Addresses: FC = () => {
   return <div>
     <h2>Locations</h2>
     <ul>
-      {data.results.map(x => <li key={x.id}>  <span onClick={() => handleRedirect(x.id)}>{x.name}</span > <button onClick={() => handleRedirectToEdit(x.id)}>edit</button></li>)}
+      {data.map(x => <li key={x.id}>  <span onClick={() => handleRedirect(x.id)}>{x.id}</span > <button onClick={() => handleRedirectToEdit(x.id)}>edit</button></li>)}
     </ul>
   </div>;
 }

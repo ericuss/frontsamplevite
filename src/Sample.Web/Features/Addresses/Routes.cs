@@ -7,7 +7,7 @@ public static class AddressessRoutes
 {
     public static IEndpointRouteBuilder RegisterAddressessRoutes(this IEndpointRouteBuilder app, string baseRoute, ApiVersionSet apiVersionSet)
     {
-        return app.MapGroup(baseRoute + "/Addressess")
+        return app.MapGroup(baseRoute + "/addressess")
                     .WithApiVersionSet(apiVersionSet)
                     .HasApiVersion(new ApiVersion(1))
                     .GroupedByOpenApiTag("Addressess")

@@ -4,6 +4,6 @@ internal static class GetAddressess
 {
     internal static async Task<IResult> Handle(GetAddressessParams p)
     {
-        return Results.Ok();
+        return Results.Ok(new []{ new {id = 1}});
     }
 }

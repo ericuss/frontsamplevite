@@ -5,8 +5,12 @@ import { Address } from './Details/dtos';
 
 export const urlBase = 'https://rickandmortyapi.com/api/location';
 
+interface AddressDto {
+    id: string;
+}
+
 export function useAddresses() {
-    const { data, error, isLoading, mutate } = useSWR<AddressesResponse>(urlBase, fetcher)
+    const { data, error, isLoading, mutate } = useSWR<AddressDto[]>('api/v1/addressess', fetcher)
 
     return {
         data,
