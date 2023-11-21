@@ -1,5 +1,4 @@
 import useSWR from 'swr';
-import { fetcher } from '@core/http';
 
 export const urlBase = '/api/v1/addressess';
 
@@ -26,8 +25,8 @@ export function useAddressess() {
         return fetch(`${urlBase}/${id}`, requestOptions);
     };
 
-    const getAddress = (id: string) => useSWR<AddressDto>(`${urlBase}/${id}`, fetcher);
-    const getAddressess = () => useSWR<AddressDto[]>(urlBase, fetcher);
+    const getAddress = (id: string) => useSWR<AddressDto>(`${urlBase}/${id}`);
+    const getAddressess = () => useSWR<AddressDto[]>(urlBase);
 
     return {
         getAddress,

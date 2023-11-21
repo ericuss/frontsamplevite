@@ -3,7 +3,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { Addresses, Address, UpsertAddress } from '@pages/Addresses/Index';
+import { Addressess, Address, UpsertAddress } from '@pages/Addressess/Index';
 import { Home } from "@pages/Home/Index";
 
 export function RouterComponent() {
@@ -11,8 +11,8 @@ export function RouterComponent() {
     <Routes>
       <Route path="/" >
         <Route index element={<Home />} />
-        <Route path='addresses' >
-          <Route index element={<Addresses />} />
+        <Route path='addressess' >
+          <Route index element={<Addressess />} />
           <Route path=':id' >
             <Route index element={<Address />} />
             <Route path="update" element={<UpsertAddress />} />

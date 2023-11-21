@@ -1,9 +1,9 @@
-import { useAddressess } from '@pages/Addresses/hooks';
+import { useAddressess } from '@pages/Addressess/hooks';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 
-export const Addresses: FC = () => {
+export const Addressess: FC = () => {
   const navigate = useNavigate();
   const { data, error, isLoading } = useAddressess().getAddressess();
 
@@ -12,13 +12,13 @@ export const Addresses: FC = () => {
 
   const handleRedirect = (id: string) => {
     return navigate({
-      pathname: `/addresses/${id}`
+      pathname: `/addressess/${id}`
     });
   }
 
   const handleRedirectToEdit = (id: string) => {
     return navigate({
-      pathname: `/addresses/${id}/update`
+      pathname: `/addressess/${id}/update`
     });
   }
   // render data

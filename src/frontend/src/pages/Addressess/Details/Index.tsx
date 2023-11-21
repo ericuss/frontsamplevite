@@ -1,4 +1,4 @@
-import { useAddressess } from '@pages/Addresses/hooks';
+import { useAddressess } from '@pages/Addressess/hooks';
 import { Navigate, useParams } from 'react-router-dom';
 
 import './index.css';

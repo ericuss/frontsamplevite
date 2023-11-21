@@ -1,8 +1,10 @@
+import React from 'react';
 import { RouterComponent } from './routes';
+import { BrowserRouter } from 'react-router-dom';
+import { fetcher } from '@core/http';
 
 import './App.css'
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
+import { SWRConfig } from 'swr';
 
 function App() {
 
@@ -10,8 +12,10 @@ function App() {
     <BrowserRouter>
       <div className='container'>
         <React.Suspense fallback={<div>loading ...</div>}>
-          <RouterComponent />
-          {/* <Outlet /> */}
+          <SWRConfig value={{ fetcher }}>
+            <RouterComponent />
+            {/* <Outlet /> */}
+          </SWRConfig>
         </React.Suspense>
       </div>
     </BrowserRouter>
