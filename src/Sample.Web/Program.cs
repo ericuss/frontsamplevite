@@ -8,6 +8,7 @@ builder.Services
         .AddCustomCors(builder.Configuration)
         .AddCustomOpenApi()
         .AddCustomHealthChecks()
+        .AddCustomAntiforgeryToken()
         ;  
 
 var app = builder.Build();
@@ -22,6 +23,7 @@ app.UseStaticFiles();
 
 app.UseCustomCompressionResponse();
 app.UseCustomCors();
+app.UseCustomAntiforgeryToken();
 app.UseAcceptJsonHeader();
 
 app
